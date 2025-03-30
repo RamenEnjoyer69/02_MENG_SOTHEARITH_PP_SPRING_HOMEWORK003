@@ -88,7 +88,16 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Event saveEvent(EventRequest request) {
+    public Event saveEvent(EventRequest request) throws NotFoundException {
+        if(venueRepository.getVenueById(request.getVenueId())==null){
+            throw new NotFoundException("No venue with ID [ " +request.getVenueId() + " ] was found");
+        }
+        for (Long attendeeId : request.getAttendeeIds()) {
+            if (attendeeRepository.getAttendeeById(attendeeId) == null) {
+                throw new NotFoundException("No attendee with ID [ " + attendeeId + " ] was found.");
+            }
+        }
+
         Event event = eventRepository.saveEvent(request);
         for (Long attendeeId : request.getAttendeeIds()) {
             eventAttendeeRepository.insertEventIdAndAttendeeId(event.getEventId(), attendeeId);
