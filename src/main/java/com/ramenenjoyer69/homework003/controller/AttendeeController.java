@@ -6,6 +6,7 @@ import com.ramenenjoyer69.homework003.model.request.AttendeeRequest;
 import com.ramenenjoyer69.homework003.model.response.DeleteResponse;
 import com.ramenenjoyer69.homework003.model.response.Response;
 import com.ramenenjoyer69.homework003.service.AttendeeService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -56,7 +57,7 @@ public class AttendeeController {
     }
 
     @PutMapping("/{attendee_id}")
-    public ResponseEntity<Response<Attendee>> updateAttendeeById(@RequestBody AttendeeRequest request, @PathVariable("attendee_id") Long attendeeId) {
+    public ResponseEntity<Response<Attendee>> updateAttendeeById(@Valid @RequestBody AttendeeRequest request, @PathVariable("attendee_id") Long attendeeId) {
         Attendee attendee = attendeeService.updateAttendeeById(request, attendeeId);
 
         Response<Attendee> response = new Response<>(
@@ -69,7 +70,7 @@ public class AttendeeController {
     }
 
     @PostMapping()
-    public ResponseEntity<Response<Attendee>> saveAttendee(@RequestBody AttendeeRequest request) {
+    public ResponseEntity<Response<Attendee>> saveAttendee(@Valid @RequestBody AttendeeRequest request) {
         Attendee attendee = attendeeService.saveAttendee(request);
 
         Response<Attendee> response = new Response<>(

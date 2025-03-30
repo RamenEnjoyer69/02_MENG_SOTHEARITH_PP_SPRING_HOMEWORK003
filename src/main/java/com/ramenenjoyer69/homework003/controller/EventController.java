@@ -6,6 +6,7 @@ import com.ramenenjoyer69.homework003.model.request.EventRequest;
 import com.ramenenjoyer69.homework003.model.response.DeleteResponse;
 import com.ramenenjoyer69.homework003.model.response.Response;
 import com.ramenenjoyer69.homework003.service.EventService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -54,7 +55,7 @@ public class EventController {
     }
 
     @PutMapping("/{event_id}")
-    public ResponseEntity<Response<Event>> updateEventById(@PathVariable("event_id") Long eventId, @RequestBody EventRequest request) {
+    public ResponseEntity<Response<Event>> updateEventById(@PathVariable("event_id") Long eventId,@Valid @RequestBody EventRequest request) {
         Event event = eventService.updateEventById(eventId, request);
 
         Response<Event> response = new Response<>(
@@ -67,7 +68,7 @@ public class EventController {
     }
 
     @PostMapping
-    public ResponseEntity<Response<Event>> saveEvent(@RequestBody EventRequest request) {
+    public ResponseEntity<Response<Event>> saveEvent(@Valid @RequestBody EventRequest request) {
         Event event = eventService.saveEvent(request);
 
         Response<Event> response = new Response<>(

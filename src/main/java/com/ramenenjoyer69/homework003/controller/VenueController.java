@@ -6,6 +6,7 @@ import com.ramenenjoyer69.homework003.model.request.VenueRequest;
 import com.ramenenjoyer69.homework003.model.response.DeleteResponse;
 import com.ramenenjoyer69.homework003.model.response.Response;
 import com.ramenenjoyer69.homework003.service.VenueService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -56,7 +57,7 @@ public class VenueController {
     }
 
     @PutMapping("/{venue_id}")
-    public ResponseEntity<Response<Venue>> updateVenueById(@PathVariable("venue_id") Long venueId, @RequestBody VenueRequest request) {
+    public ResponseEntity<Response<Venue>> updateVenueById(@PathVariable("venue_id") Long venueId,@Valid @RequestBody VenueRequest request) {
         Venue venue = venueService.updateVenueById(venueId, request);
         Response<Venue> response = new Response<>(
                 "The venue has been updated successfully",
@@ -71,7 +72,7 @@ public class VenueController {
     }
 
     @PostMapping()
-    public ResponseEntity<Response<Venue>> saveVenue(@RequestBody VenueRequest request) {
+    public ResponseEntity<Response<Venue>> saveVenue(@Valid @RequestBody VenueRequest request) {
         Venue venue = venueService.saveVenue(request);
 
         Response<Venue> response = new Response<>(

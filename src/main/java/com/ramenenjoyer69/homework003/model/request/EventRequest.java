@@ -19,7 +19,7 @@ public class EventRequest {
 
     @NotNull(message = "The event name cannot be null")
     @NotBlank(message = "The event name is required")
-    @Size(min = 3, max = 100 , message = "The event name must be between 3 to 100 characters")
+    @Size(min = 2, max = 100 , message = "The event name must be between 2 to 100 characters")
     private String eventName;
 
     @NotNull(message = "The event date cannot be null")

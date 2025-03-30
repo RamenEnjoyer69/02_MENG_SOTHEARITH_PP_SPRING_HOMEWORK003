@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class AttendeeRequest {
     @NotNull(message = "The attendee name cannot be null")
     @NotBlank(message = "The attendee name is required")
-    @Size(min = 3, max = 100 , message = "The attendee name must be between 3 to 100 characters")
+    @Size(min = 2, max = 100 , message = "The attendee name must be between 2 to 100 characters")
     private String attendeeName;
 
 
